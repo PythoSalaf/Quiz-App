@@ -7,7 +7,7 @@ import Box from "./box.svg";
 import Spin from "./spin.svg";
 import Star from "./star.svg";
 import Life from "./life.svg";
-import Proicon from "./proicon.svg";
+import Proicon from "./Proicon.svg";
 
 export {
   Logo,
