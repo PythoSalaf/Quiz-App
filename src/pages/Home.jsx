@@ -14,7 +14,7 @@ import {
 const Home = () => {
   const navigate = useNavigate();
   return (
-    <div className="bg-[#061D33] h-screen relative flex items-start py-8 justify-center text-white">
+    <div className="bg-[#061D33]  relative flex items-start py-8 justify-center text-white">
       <div className="absolute inset-0 pointer-events-none">
         <img
           src={Icon}
