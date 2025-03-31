@@ -11,6 +11,7 @@ const Quiz = () => {
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [timeLeft, setTimeLeft] = useState(30);
   const navigate = useNavigate();
 
@@ -20,11 +21,10 @@ const Quiz = () => {
 
   useEffect(() => {
     if (timeLeft === 0) {
-      setTimeout(() => {
-        handleTimeout();
-      }, 0);
+      handleNext();
       return;
     }
+
     const timer = setInterval(() => {
       setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
@@ -41,24 +41,19 @@ const Quiz = () => {
     return shuffled;
   };
 
-  // Handle Answer Selection
   const handleAnswer = (option) => {
-    const correctAnswer = shuffledQuestions[currentIndex]?.answer;
-    setUserAnswers([...userAnswers, option === correctAnswer]); // Save if correct (true) or incorrect (false)
-    handleNext();
+    setSelectedAnswer(option);
   };
 
-  // Handle Timeout
-  const handleTimeout = () => {
-    setUserAnswers([...userAnswers, false]); // Mark as incorrect
-    handleNext();
-  };
-
-  // Handle Next Question
   const handleNext = () => {
+    const correctAnswer = shuffledQuestions[currentIndex]?.answer;
+    const isCorrect = selectedAnswer === correctAnswer;
+    setUserAnswers([...userAnswers, isCorrect]);
+
     if (currentIndex < shuffledQuestions.length - 1) {
       setCurrentIndex(currentIndex + 1);
-      setTimeLeft(30); // Reset timer
+      setTimeLeft(30);
+      setSelectedAnswer(null);
     } else {
       alert("Quiz Completed!");
     }
@@ -75,7 +70,6 @@ const Quiz = () => {
       </div>
 
       <div className="w-[96%] mx-auto flex flex-col items-center justify-center">
-        {/* Header (Home, Stars, Life, Speaker) */}
         <div className="w-[90%] mx-auto flex items-center justify-between">
           <div
             className="text-[#CCF7FF] bg-[#0090AA] cursor-pointer w-8 h-8 rounded-full flex items-center justify-center"
@@ -99,9 +93,8 @@ const Quiz = () => {
           </div>
         </div>
 
-        {/* 🏆 Score Bar */}
+        {/* Score Bar */}
         <div className="w-[90%] mx-auto mt-6 flex items-center">
-          {/* Progress Bar */}
           <div className="relative w-[85%] h-6 bg-gray-700 border-2 border-[#80EBFF] rounded-lg flex overflow-hidden">
             {userAnswers.map((correct, index) => (
               <div
@@ -112,14 +105,12 @@ const Quiz = () => {
               ></div>
             ))}
           </div>
-
-          {/* Progress Counter */}
           <div className="ml-2 px-3 py-1 bg-[#00B4D4] text-black font-bold rounded-md">
             {currentIndex + 1}/{shuffledQuestions.length}
           </div>
         </div>
 
-        {/* Question Container */}
+        {/* Question */}
         <div className="relative w-[90%] py-4 mt-10 mx-auto border-3 border-[#80EBFF] rounded-tr-2xl rounded-bl-2xl flex items-center">
           <div className="w-[80%] mx-auto">
             <h2 className="text-lg">
@@ -137,26 +128,35 @@ const Quiz = () => {
           </p>
         </div>
 
-        {/* Options List */}
+        {/* Options */}
         <ol className="w-[90%] mx-auto mt-7 space-y-4 list-none">
           {shuffledQuestions[currentIndex]?.options?.map((option, index) => (
             <li
               key={index}
-              className="flex items-center w-full relative bg-[#0A3055] border-2 border-[#80EBFF] rounded-tr-2xl rounded-bl-2xl py-1 gap-x-5 px-1 cursor-pointer hover:bg-[#0090AA]"
+              className={`flex items-center w-full relative bg-[#0A3055] border-2 border-[#80EBFF] rounded-tr-2xl rounded-bl-2xl py-1 gap-x-5 px-1 cursor-pointer ${
+                selectedAnswer === option
+                  ? "bg-[#007C92]"
+                  : "hover:bg-[#0090AA]"
+              }`}
               onClick={() => handleAnswer(option)}
             >
-              {/* Hexagon Shape with Alphabet */}
               <div className="relative w-11 h-11">
                 <div className="absolute inset-0 bg-blue-500 clip-hexagon flex items-center justify-center text-white font-bold text-lg">
                   {String.fromCharCode(65 + index)}
                 </div>
               </div>
-
-              {/* Option Text */}
               <p className="ml-4 text-lg text-white">{option}</p>
             </li>
           ))}
         </ol>
+
+        {/* Next Button (Always Visible) */}
+        <button
+          className="mt-5 w-[90%] mx-auto py-2 bg-[#0090AA] text-white font-semibold rounded-lg hover:bg-[#007C92] transition-all border-2 border-[#1460AA]"
+          onClick={handleNext}
+        >
+          Next Question
+        </button>
       </div>
     </div>
   );
