@@ -19,7 +19,7 @@ const Home = () => {
         <img
           src={Icon}
           alt="bg-vector"
-          className="w-full h-full object-cover opacity-80"
+          className="w-full h-full object-cover opacity-50"
         />
       </div>
 
