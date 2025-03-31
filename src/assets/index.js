@@ -8,6 +8,9 @@ import Spin from "./spin.svg";
 import Star from "./star.svg";
 import Life from "./life.svg";
 import Proicon from "./Proicon.svg";
+import Leadone from "./leadone.svg";
+import Leadtwo from "./leadtwo.svg";
+import Leadthree from "./leadthree.svg";
 
 export {
   Logo,
@@ -20,4 +23,7 @@ export {
   Star,
   Life,
   Proicon,
+  Leadone,
+  Leadtwo,
+  Leadthree,
 };
