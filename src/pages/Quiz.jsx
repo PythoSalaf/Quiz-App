@@ -22,6 +22,8 @@ const Quiz = () => {
   }, []);
 
   useEffect(() => {
+    if (quizCompleted) return; // Stop the timer when quiz is completed
+
     if (timeLeft === 0) {
       handleNext();
       return;
@@ -32,7 +34,7 @@ const Quiz = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeLeft]);
+  }, [timeLeft, quizCompleted]);
 
   const shuffleQuestions = (questions) => {
     let shuffled = [...questions];
@@ -48,6 +50,8 @@ const Quiz = () => {
   };
 
   const handleNext = () => {
+    if (quizCompleted) return; // Prevent further updates
+
     const correctAnswer = shuffledQuestions[currentIndex]?.answer;
     const isCorrect = selectedAnswer === correctAnswer;
     setUserAnswers([...userAnswers, isCorrect]);
