@@ -5,6 +5,7 @@ import { GoHomeFill } from "react-icons/go";
 import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
 import { techQuestions } from "../components/Dummytext";
 import { BsStopwatchFill } from "react-icons/bs";
+import { QuizModal } from "../components";
 
 const Quiz = () => {
   const [toggle, setToggle] = useState(false);
@@ -13,6 +14,7 @@ const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [timeLeft, setTimeLeft] = useState(30);
+  const [quizCompleted, setQuizCompleted] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,8 +57,16 @@ const Quiz = () => {
       setTimeLeft(30);
       setSelectedAnswer(null);
     } else {
-      alert("Quiz Completed!");
+      setQuizCompleted(true);
     }
+  };
+
+  const handleRestart = () => {
+    setCurrentIndex(0);
+    setUserAnswers([]);
+    setTimeLeft(30);
+    setQuizCompleted(false);
+    setShuffledQuestions(shuffleQuestions(techQuestions));
   };
 
   return (
@@ -158,6 +168,15 @@ const Quiz = () => {
           Next Question
         </button>
       </div>
+
+      {quizCompleted && (
+        <QuizModal
+          score={userAnswers.filter(Boolean).length}
+          total={shuffledQuestions.length}
+          onClose={() => navigate("/")}
+          onRestart={handleRestart}
+        />
+      )}
     </div>
   );
 };
