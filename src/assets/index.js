@@ -11,6 +11,9 @@ import Proicon from "./Proicon.svg";
 import Leadone from "./leadone.svg";
 import Leadtwo from "./leadtwo.svg";
 import Leadthree from "./leadthree.svg";
+import Third from "./Third.svg";
+import Second from "./Second.svg";
+import First from "./First.svg";
 
 export {
   Logo,
@@ -26,4 +29,7 @@ export {
   Leadone,
   Leadtwo,
   Leadthree,
+  First,
+  Second,
+  Third,
 };

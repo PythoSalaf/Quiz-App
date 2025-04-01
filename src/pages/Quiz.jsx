@@ -159,7 +159,7 @@ const Quiz = () => {
                   {String.fromCharCode(65 + index)}
                 </div>
               </div>
-              <p className="ml-4 text-lg text-white">{option}</p>
+              <p className="ml-4 text-base text-white">{option}</p>
             </li>
           ))}
         </ol>

@@ -1,3 +1,7 @@
+body {
+  font-family: "JetBrains Mono", monospace;
+}
+
 @import "tailwindcss";
 
 @layer utilities {

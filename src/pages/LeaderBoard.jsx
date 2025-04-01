@@ -1,7 +1,23 @@
-import React from "react";
-import { Icon, Leadone, Leadthree, Leadtwo, Profile } from "../assets";
+import { useState } from "react";
+import {
+  First,
+  Icon,
+  Leadone,
+  Leadthree,
+  Leadtwo,
+  Life,
+  Profile,
+  Second,
+  Star,
+  Third,
+} from "../assets";
+import { useNavigate } from "react-router-dom";
+import { GoHomeFill } from "react-icons/go";
+import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
 
 const LeaderBoard = () => {
+  const [toggle, setToggle] = useState(false);
+  const navigate = useNavigate();
   const LeaderData = [
     {
       id: 1,
@@ -33,7 +49,7 @@ const LeaderBoard = () => {
     },
   ];
   return (
-    <div className="bg-[#061D33] h-screen relative flex items-start py-8 justify-center text-white">
+    <div className="bg-[#061D33] relative flex items-start py-8 justify-center text-white">
       <div className="absolute inset-0 pointer-events-none">
         <img
           src={Icon}
@@ -43,8 +59,33 @@ const LeaderBoard = () => {
       </div>
 
       <div className="w-[90%] mx-auto flex flex-col items-center justify-center ">
-        <h2 className="text-[#55E5FF] text-2xl font-semibold">
-          Leadership Board
+        <div className="w-[95%] mx-auto flex items-center justify-between">
+          <div
+            className="text-[#CCF7FF] bg-[#0090AA] cursor-pointer w-8 h-8 rounded-full flex items-center justify-center"
+            onClick={() => navigate("/")}
+          >
+            <GoHomeFill className="w-[75%] h-[75%]" />
+          </div>
+          <div className="flex items-center gap-x-3">
+            <img src={Star} alt="" className="w-[100px]" />
+            <img src={Life} alt="" className="w-[75px]" />
+          </div>
+          <div
+            className="text-[#CCF7FF] bg-[#0090AA] cursor-pointer w-8 h-8 rounded-full flex items-center justify-center"
+            onClick={() => setToggle(!toggle)}
+          >
+            {toggle ? (
+              <HiSpeakerXMark className="w-[75%] h-[75%]" />
+            ) : (
+              <HiSpeakerWave className="w-[75%] h-[75%]" />
+            )}
+          </div>
+        </div>
+        <h2
+          className="text-[#1978D4] text-2xl py-1 mt-4 font-semibold "
+          style={{ WebkitTextStroke: "2px #55E5FF" }}
+        >
+          LeadershipBoard
         </h2>
         <div className="boarder bg-[#55E5FF] rounded-r-lg w-full py-1 px-2 mt-8">
           <div className="flex items-center justify-between">
@@ -54,10 +95,34 @@ const LeaderBoard = () => {
           </div>
         </div>
 
-        <div className="flex items-end gap-x-8 w-[90%] mx-auto mt-16">
-          <div className="bg-[#004855] w-[160px] h-[50px]"></div>
-          <div className="bg-[#004855] w-[160px] h-[90px]"></div>
-          <div className="bg-[#004855] w-[160px] h-[50px]"></div>
+        <div className="flex items-end justify-center  gap-x-8 w-[90%] mx-auto mt-16">
+          <div className="flex flex-col items-center justify-center">
+            <img src={Third} alt="" className="mb-[-30px] z-20 w-[70px]" />
+            <div className="bg-[#004855] w-[80px] h-[100px] z-10">
+              <div className="w-full flex flex-col items-center justify-center pt-8">
+                <h3 className="text-sm text-[#00D8FF]">Musa Tao</h3>
+                <p className="text-[#2BDEFF]">200xp</p>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col items-start justify-start">
+            <img src={First} alt="" className="mb-[-30px] z-20" />
+            <div className="bg-[#004855] w-[80px] h-[180px] z-10">
+              <div className="w-full flex flex-col items-center justify-center pt-16">
+                <h3 className="text-sm text-[#00D8FF]">Johndoe</h3>
+                <p className="text-[#2BDEFF]">500xp</p>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col items-center justify-center">
+            <img src={Second} alt="" className="mb-[-30px] z-20 h-[100px] z" />
+            <div className="bg-[#004855] w-[80px] h-[102px] z-10">
+              <div className="w-full flex flex-col items-center justify-center pt-8">
+                <h3 className="text-sm text-[#00D8FF]">JohnWiz</h3>
+                <p className="text-[#2BDEFF]">300xp</p>
+              </div>
+            </div>
+          </div>
         </div>
         <div className="mt-14 w-full">
           {LeaderData.map((item) => (
