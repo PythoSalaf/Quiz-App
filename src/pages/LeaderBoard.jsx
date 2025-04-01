@@ -115,7 +115,7 @@ const LeaderBoard = () => {
             </div>
           </div>
           <div className="flex flex-col items-center justify-center">
-            <img src={Second} alt="" className="mb-[-30px] z-20 h-[100px] z" />
+            <img src={Second} alt="" className="mb-[-30px] z-20 h-[100px] " />
             <div className="bg-[#004855] w-[80px] h-[102px] z-10">
               <div className="w-full flex flex-col items-center justify-center pt-8">
                 <h3 className="text-sm text-[#00D8FF]">JohnWiz</h3>
