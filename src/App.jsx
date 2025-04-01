@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Home, Quiz, LeaderBoard } from "./pages";
+import { Intro } from "./components";
 
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [showIntro, setShowIntro] = useState(true); // Track if intro should be shown
 
   useEffect(() => {
     const handleResize = () => {
@@ -20,6 +22,10 @@ function App() {
         Please open this application on a mobile device 📱
       </div>
     );
+  }
+
+  if (showIntro) {
+    return <Intro onContinue={() => setShowIntro(false)} />;
   }
 
   return (
